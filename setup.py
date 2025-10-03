@@ -1,0 +1,22 @@
+from setuptools import setup, find_packages
+setup(
+        name='bgmat',
+        python_requires=">=3.10",
+        version='0.0',
+        packages=find_packages(),
+        install_requires=[
+   'jaxlib==0.4.32',
+   'jax==0.4.32',
+   'matplotlib==3.7.0',
+   'numpy==1.25.2',
+   'e3nn-jax==0.20.3',
+   'scipy==1.10.0',
+   'dm-haiku==0.0.13',
+   'ml-collections==0.1.1',
+   'optax==0.2.4',
+   'flax==0.10.2',
+   'ipykernel',
+   'distrax==0.1.2',
+   'tensorflow-probability==0.23.0'
+]
+)
