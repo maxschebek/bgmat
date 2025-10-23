@@ -1,5 +1,5 @@
 # Scalable Boltzmann Generators for equilibrium sampling of large-scale materials
-Maximilian Schebek, Jutta Rogal 
+Maximilian Schebek, Frank  Noé, Jutta Rogal 
 
 [![arXiv](https://img.shields.io/badge/arXiv-2509.25486-b31b1b.svg)](https://arxiv.org/abs/2509.25486)
 
@@ -31,7 +31,7 @@ The code is organized in the following folders:
 ```
 @misc{schebek2025scalableboltzmanngeneratorsequilibrium,
       title={Scalable Boltzmann Generators for equilibrium sampling of large-scale materials}, 
-      author={Maximilian Schebek and Jutta Rogal},
+      author={Maximilian Schebek and Frank Noé and Jutta Rogal},
       year={2025},
       eprint={2509.25486},
       archivePrefix={arXiv},
