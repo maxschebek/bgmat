@@ -119,7 +119,7 @@ def build_eval_functions(config_flow, config_eval, context: float = None):
         rng_key = hk.next_rng_key()
 
         rng_key, base_key, add_key, defect_key = jax.random.split(rng_key, 4)
-        base_samples, base_log_prob = base._sample_n_and_log_prob(
+        base_samples, base_log_prob = base.sample_n_and_log_prob(
             key=base_key, n=num_samples
         )
 
@@ -128,7 +128,7 @@ def build_eval_functions(config_flow, config_eval, context: float = None):
         new_box_tiled = jnp.tile(new_box, (num_samples, 1))
 
         if context is not None:
-            context_expanded = context * jnp.ones((num_samples, 1))
+            context_expanded = context * jnp.ones((num_samples, 1, 1))
         else:
             context_expanded = None
         samples_mapped, log_det = flow.forward_and_log_det(
@@ -152,7 +152,7 @@ def build_eval_functions(config_flow, config_eval, context: float = None):
         pbc_diff_aux = jax.vmap(difference_pbc)(
             samples_aux, samples_phys, new_box_tiled
         )
-        energies_aux = -base._noise_dist_aux.log_prob(pbc_diff_aux)
+        energies_aux = -base.noise_dist_aux.log_prob(pbc_diff_aux)
 
         log_prob = base_log_prob - log_det
         energies_phys = energy_fn(samples_phys, new_box)
