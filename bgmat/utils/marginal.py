@@ -44,8 +44,8 @@ def marginal_sample(pos_phys, pos_aux, flow, base):
     diffs_aux = pos_aux - pos_phys
     diffs_aux_inv = displacements_aux_inv - displacements_phys_inv
 
-    log_unnormalized_aux = base._noise_dist_aux.log_prob(diffs_aux)
-    log_unnormalized_aux_inv = base._noise_dist_aux.log_prob(diffs_aux_inv)
+    log_unnormalized_aux = base.noise_dist_aux.log_prob(diffs_aux)
+    log_unnormalized_aux_inv = base.noise_dist_aux.log_prob(diffs_aux_inv)
     log_unnormalized_phys_inv = (
         base._noise_dist.log_prob(displacements_phys_inv) - log_norm
     )
@@ -80,7 +80,7 @@ def log_marginal_weight_given_generated(
     """
     displacements_phys, energy_phys, key = input_tuple
 
-    noise_0 = base._noise_dist_aux.sample(sample_shape=n_marginal, seed=key)
+    noise_0 = base.noise_dist_aux.sample(sample_shape=n_marginal, seed=key)
     batch_pos_aux = noise_0 + displacements_phys
 
     log_p = -energy_phys * target_beta

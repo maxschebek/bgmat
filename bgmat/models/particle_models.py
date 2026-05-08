@@ -189,7 +189,7 @@ class AugmentedLattice(ParticleModel, metaclass=abc.ABCMeta):
         noise_dist_aux = distrax.Normal(
             loc=jnp.zeros((self.num_particles, self.dim)), scale=noise_scale_aux
         )
-        self._noise_dist_aux = distrax.Independent(noise_dist_aux, 2)
+        self.noise_dist_aux = distrax.Independent(noise_dist_aux, 2)
 
         self._wrap = wrap
 
@@ -222,7 +222,7 @@ class AugmentedLattice(ParticleModel, metaclass=abc.ABCMeta):
         lattice = self.wrap(lattice)
         return lattice, lc, repeats
 
-    def _sample_n_and_log_prob(self, key: PRNGKey, n: int) -> Tuple[Array, Array]:
+    def sample_n_and_log_prob(self, key: PRNGKey, n: int) -> Tuple[Array, Array]:
         keys = jax.random.split(key, 2 + n)
 
         # sample n times
@@ -249,7 +249,7 @@ class AugmentedLattice(ParticleModel, metaclass=abc.ABCMeta):
         log_prob_phys_unnorm = log_prob_phys - log_norm
 
         # subtract normalization constant to get unnormal
-        noise_aux, log_prob_aux = self._noise_dist_aux.sample_and_log_prob(
+        noise_aux, log_prob_aux = self.noise_dist_aux.sample_and_log_prob(
             sample_shape=n, seed=keys[1]
         )
 
@@ -268,7 +268,7 @@ class AugmentedLattice(ParticleModel, metaclass=abc.ABCMeta):
         return samples, log_prob
 
     def _sample_n(self, key: PRNGKey, n: int) -> Array:
-        samples, _ = self._sample_n_and_log_prob(key, n)
+        samples, _ = self.sample_n_and_log_prob(key, n)
         return samples
 
     def _wrap_displacement(self, dx: Array) -> Array:

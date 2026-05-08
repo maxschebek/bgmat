@@ -394,12 +394,8 @@ class GNN(hk.Module):
         if box_length is None:
             box_length = jnp.tile(self._box_length, (n_batch, 1, 1))
 
-        if box_length.shape[1:] == (3, 3):
-            # triclinic case
-            batched_metric = jax.vmap(difference_pbc_triclinic)
-        else:
-            # isotropic case
-            batched_metric = jax.vmap(difference_pbc)
+
+        batched_metric = jax.vmap(difference_pbc)
 
         x_abs = jax.vmap(wrap)(x + lattice, -box_length / 2, box_length / 2)
 
@@ -426,6 +422,7 @@ class GNN(hk.Module):
         sender_vecs = batched_index_nodes(x_abs, senders)
         receiver_vecs = batched_index_nodes(x_abs, receivers)
         # vectors = self._metric(receiver_vecs, sender_vecs)
+        # print(receiver_vecs.shape, sender_vecs.shape, box_length.shape)
         vectors = batched_metric(receiver_vecs, sender_vecs, box_length)
 
         h1 = self._encoding_fn_diffs(x)

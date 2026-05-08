@@ -54,7 +54,7 @@ def _get_loss(
         4,
     )
 
-    base_samples, base_log_prob = base._sample_n_and_log_prob(
+    base_samples, base_log_prob = base.sample_n_and_log_prob(
         key=base_key, n=num_samples
     )
 
@@ -69,7 +69,7 @@ def _get_loss(
 
     pbc_diff_aux = difference_pbc(samples_aux, samples_phys, base.width)
 
-    energies_aux = -base._noise_dist_aux.log_prob(pbc_diff_aux)
+    energies_aux = -base.noise_dist_aux.log_prob(pbc_diff_aux)
 
     log_prob = base_log_prob - log_det
     energies_phys = energy_fn(samples_phys)
