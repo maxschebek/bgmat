@@ -2,13 +2,14 @@
 Maximilian Schebek, Frank  Noé, Jutta Rogal 
 
 [![arXiv](https://img.shields.io/badge/arXiv-2509.25486-b31b1b.svg)](https://arxiv.org/abs/2509.25486)
+[![Nature Communications](https://img.shields.io/badge/Nature_Communications-published-1DA462.svg)](https://www.nature.com/articles/s41467-026-73900-9)
 
 This repository provides the code for training and evaluating scalable Boltzmann Generators for large-scale materials, accompanying our paper. The code builds on the implementation by Wirnsberger et al. [1,2] and extends it with additional features and modifications for our study.
 
 
 
 ## Abstract
-The use of generative models to sample equilibrium distributions of many-body systems, as first demonstrated by Boltzmann Generators, has attracted substantial interest due to their ability to produce unbiased and uncorrelated samples in `one shot'. Despite their promise and impressive results across the natural sciences, scaling these models to large systems remains a major challenge. In this work, we introduce a Boltzmann Generator architecture that addresses this scalability bottleneck with a focus on applications in materials science. We leverage augmented coupling flows in combination with graph neural networks to base the generation process on local environmental information, while allowing for energy-based training and fast inference. Compared to previous architectures, our model trains significantly faster, requires far less computational resources, and achieves superior sampling efficiencies. Crucially, the architecture is transferable to larger system sizes, which allows for the efficient sampling of materials with simulation cells of unprecedented size. We demonstrate the potential of our approach by applying it to several materials systems, including Lennard-Jones crystals, ice phases of mW water, and the phase diagram of silicon, for system sizes well above one thousand atoms. The trained Boltzmann Generators produce highly accurate equilibrium ensembles for various crystal structures, as well as Helmholtz and Gibbs free energies across a range of system sizes, able to reach scales where finite-size effects become negligible.
+Generating equilibrium ensembles of structures is essential for modeling molecules and materials, yet traditional simulators like molecular dynamics suffer from limited sampling efficiency. Boltzmann Generators introduced the concept of one-shot deep learning for equilibrium sampling, but scalability to large systems has remained a major challenge. Here, we overcome this scaling limitation with a Boltzmann Generator architecture that can model large materials systems. Our approach combines augmented coupling flows with graph neural networks to exploit local environments, enabling energy-based training and rapid inference. Compared to previous designs, it trains faster, uses fewer resources, and achieves superior sampling efficiency. Crucially, it transfers to much larger system sizes, allowing efficient sampling of materials with simulation cells exceeding a thousand atoms. We demonstrate its capabilities on Lennard-Jones crystals, mW water ice phases, and the silicon phase diagram, producing accurate equilibrium ensembles and free energies across scales where finite-size effects vanish.
 
 ## Installation
 The package and all dependencies can be installed via
@@ -29,15 +30,23 @@ The code is organized in the following folders:
 
 ## Citation
 ```
-@misc{schebek2025scalableboltzmanngeneratorsequilibrium,
-      title={Scalable Boltzmann Generators for equilibrium sampling of large-scale materials}, 
-      author={Maximilian Schebek and Frank Noé and Jutta Rogal},
-      year={2025},
-      eprint={2509.25486},
-      archivePrefix={arXiv},
-      primaryClass={cond-mat.stat-mech},
-      url={https://arxiv.org/abs/2509.25486}, 
+﻿@Article{Schebek2026,
+author={Schebek, Maximilian
+and No{\'e}, Frank
+and Rogal, Jutta},
+title={Scalable Boltzmann generators for equilibrium sampling of large-scale materials},
+journal={Nature Communications},
+year={2026},
+month={Jun},
+day={05},
+volume={17},
+number={1},
+pages={5010},
+issn={2041-1723},
+doi={10.1038/s41467-026-73900-9},
+url={https://doi.org/10.1038/s41467-026-73900-9}
 }
+
 ```
 
 ## References
@@ -45,4 +54,4 @@ The code is organized in the following folders:
 [2] [Code on GitHub](https://github.com/google-deepmind/flows_for_atomic_solids)
 
 ---
-![](figs/rdf_with_structures.png)
+![](figs/overview.png)
